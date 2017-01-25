@@ -16,6 +16,7 @@
                 $varSql = "INSERT INTO auteur(nom,prenom,date_naissance) VALUES(?,?,?)"; 
                 $idRequete = executeRequete($cnx,$varSql,array($nom,$prenom,$date_naissance));
             }
+            header('Location:listeAuteur.php');
             ?>
             
             <p>Ajouter un auteur</p>
