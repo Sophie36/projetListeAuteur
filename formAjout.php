@@ -8,22 +8,16 @@
             require_once 'include/infoconnexion.php';
             require_once 'include/connexion.php';
             require_once 'include/executeRequete.php';
-            
-            $nom= $_POST["nom"] ;
-            $prenom= $_POST["prenom"];
-            $date_naissance= $_POST["date_naissance"];
-            
-            if (isset($_POST['nom']) && isset($_POST['prenom'])&& isset($_POST['date_naissance'])) {
-            // on affiche nos résultats
-            echo 'Votre nom est '.$_POST['nom'].' ,votre prénom est '.$_POST['prenom'].' , et votre date de naissance est '.$_POST['date_naissance'];
-            }
             $cnx=connexion(UTILISATEUR,MOTDEPASSE,SERVER,BASEDEDONNEES);
-            echo "<h2>Les auteurs du XVIII eme siecle</h2>";
-            
-            $varSql = "INSERT INTO auteur(nom,prenom,date_naissance) VALUES('$nom','$prenom','$date_naissance')"; 
-           
-            $idRequete = executeRequete($cnx,$varSql);
+            if (isset($_POST['nom']) && isset($_POST['prenom'])&& isset($_POST['date_naissance'])) {
+                $nom=$_POST["nom"];
+                $prenom=$_POST["prenom"];
+                $date_naissance=$_POST["date_naissance"];
+                $varSql = "INSERT INTO auteur(nom,prenom,date_naissance) VALUES(?,?,?)"; 
+                $idRequete = executeRequete($cnx,$varSql,array($nom,$prenom,$date_naissance));
+            }
             ?>
+            
             <p>Ajouter un auteur</p>
 
             <form method="post" action="formAjout.php">
