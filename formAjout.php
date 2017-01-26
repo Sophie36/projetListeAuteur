@@ -15,8 +15,8 @@
                 $date_naissance=$_POST["date_naissance"];
                 $varSql = "INSERT INTO auteur(nom,prenom,date_naissance) VALUES(?,?,?)"; 
                 $idRequete = executeRequete($cnx,$varSql,array($nom,$prenom,$date_naissance));
+                header('Location:listeAuteur.php');
             }
-            header('Location:listeAuteur.php');
             ?>
             
             <p>Ajouter un auteur</p>
@@ -36,6 +36,7 @@
                     <input type="text" name="date_naissance" id="date_naissance" placeholder="Ex : 1974" size="30" maxlength="10" />
                 </p>
                 <input type="submit" value="Valider" />
+                <input type="submit" value="Annuler" />
             </form>
 
 
