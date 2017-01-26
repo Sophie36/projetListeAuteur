@@ -11,7 +11,7 @@
             $cnx=connexion(UTILISATEUR,MOTDEPASSE,SERVER,BASEDEDONNEES);
             echo "<h2>Formulaire de consultation</h2>";
             if(isset($_POST['identifiant'])){
-               $id_auteur=$_POST['identifiant'];
+            $id_auteur=$_POST['identifiant'];
             $varSql = "SELECT nom,prenom,date_naissance FROM auteur WHERE id_auteur= ?";
             $idRequete = executeRequete($cnx,$varSql,array($id_auteur));
                 echo '<table>';

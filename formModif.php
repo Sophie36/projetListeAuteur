@@ -11,13 +11,13 @@
             $cnx=connexion(UTILISATEUR,MOTDEPASSE,SERVER,BASEDEDONNEES);
             echo "<h2>Formulaire de modification</h2>";
             if(isset($_POST['identifiant'])){
-               $id_auteur=$_POST['identifiant'];
-            $varSql = "SELECT nom,prenom,date_naissance FROM auteur WHERE id_auteur= ?";
+            $id_auteur=$_POST['identifiant'];
+            $varSql = "SELECT id_auteur,nom,prenom,date_naissance FROM auteur WHERE id_auteur= ?";
             $idRequete = executeRequete($cnx,$varSql,array($id_auteur));
-                echo '<table>';
+                 echo '<table>';
             while($ligne=$idRequete->fetch()){
                 
-                echo '<form method="POST" action="listeAuteur.php">';
+                /*echo '<form method="POST" action="listeAuteur.php">';
                 
                 echo '<tr>';
                 echo '<td>'.'<input type="text" name="id" value="'. $ligne['nom'].'">'.'</td>';
@@ -28,38 +28,36 @@
                 echo '</form>';
                  
                 }
-            }
-            
-            //récupération des valeurs des champs:
-  //nom:
-  $nom = $_POST["nom"] ;
-  //prenom:
-  $prenom = $_POST["prenom"] ;
-  //date_naissance:
-  $adresse = $_POST["date_naissance"] ;
-  
-  //récupération de l'identifiant de la personne:
-  $id_auteur=$_POST['identifiant'];
- 
- //exécution de la requête SQL:
-  $requete = mysql_query($sql, $cnx) or die( mysql_error() ) ;
- 
- 
-  //affichage des résultats, pour savoir si la modification a marchée:
-  if($requete)
-  {
-    echo("La modification à été correctement effectuée") ;
-  }
-  else
-  {
-    echo("La modification à échouée") ;
-  }
-
-
-            
-            
+            }*/
             ?>
+            <form action="formModif.php">
             
+            <p>Identifiant:<br/>
+                <input name="id_auteur" size="22" value="<?php echo ''.$ligne["id_auteur"].'';?>" type="text" readonly/></br>
+            </p>
+            
+            <p>Nom:<br/>
+             <input name="nom" size="22" value="<?php echo ''.$ligne["nom"].'';?>" type="text"/>
+            </p>
 
+            <p>Prenom:<br/>
+             <input name="prenom" size="22" value="<?php echo ''.$ligne["prenom"].'';?>" type="text"/>
+            </p> 
+
+           <p>Date de naissance:<br/>
+            <input name="date_naissance" size="22" value="<?php echo ''.$ligne["date_naissance"].'';?>" type="text"/>
+           </p>
+
+            <input name="Modifier" value="Modifier" type="submit"/>
+            <input name="Effacer" value="Effacer" type="reset"/>
+
+            </form>
+            
+            <?php
+            //On ferme la boucle while
+             }
+            //On ferme le if
+            }
+            ?>
         </body>
 </html>
