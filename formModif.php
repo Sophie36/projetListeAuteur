@@ -14,23 +14,12 @@
             $id_auteur=$_POST['identifiant'];
             $varSql = "SELECT id_auteur,nom,prenom,date_naissance FROM auteur WHERE id_auteur= ?";
             $idRequete = executeRequete($cnx,$varSql,array($id_auteur));
-                 echo '<table>';
+            
+            echo '<table>';
+            
             while($ligne=$idRequete->fetch()){
-                
-                /*echo '<form method="POST" action="listeAuteur.php">';
-                
-                echo '<tr>';
-                echo '<td>'.'<input type="text" name="id" value="'. $ligne['nom'].'">'.'</td>';
-                echo '<td>'.'<input type="text" name="id" value="'. $ligne['prenom'].'">'.'</td>';
-                echo '<td>'.'<input type="text" name="id" value="'.$ligne['date_naissance'].'">'.'</td>';
-                echo '<td>'.'<input type="submit" value="Retour" />'.'</td>';
-                echo '</table>';
-                echo '</form>';
-                 
-                }
-            }*/
             ?>
-            <form action="formModif.php">
+            <form method='POST'action="formModif.php">
             
             <p>Identifiant:<br/>
                 <input name="id_auteur" size="22" value="<?php echo ''.$ligne["id_auteur"].'';?>" type="text" readonly/></br>
@@ -40,7 +29,7 @@
              <input name="nom" size="22" value="<?php echo ''.$ligne["nom"].'';?>" type="text"/>
             </p>
 
-            <p>Prenom:<br/>
+            <p>Prénom:<br/>
              <input name="prenom" size="22" value="<?php echo ''.$ligne["prenom"].'';?>" type="text"/>
             </p> 
 
@@ -49,7 +38,8 @@
            </p>
 
             <input name="Modifier" value="Modifier" type="submit"/>
-            <input name="Effacer" value="Effacer" type="reset"/>
+            <input name="Effacer" value="Annuler" type="reset"/>
+            <input name="Retour" value="Retour" type="submit"/>
 
             </form>
             
@@ -58,6 +48,19 @@
              }
             //On ferme le if
             }
+            if(isset($_POST['Retour'])){
+                header('location:listeAuteur.php?');
+            }
+            if(isset($_POST['Modifier'])){
+               $id_auteur=$_POST['id_auteur'];
+               $nom=$_POST['nom'];
+               $prenom=$_POST['prenom'];
+               $date_naissance=$_POST['date_naissance'];
+               $Sql = "UPDATE auteur SET nom =?,prenom = ?,date_naissance = ? WHERE id_auteur=?";
+               $idRequete = executeRequete($cnx,$Sql,array($nom,$prenom,$date_naissance,$id_auteur));
+               header('location:listeAuteur.php?');
+            }
+            
             ?>
         </body>
 </html>
