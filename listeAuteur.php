@@ -63,7 +63,12 @@
                 
                header('location:listeAuteur.php?');
             }
-            
+            if(isset($_POST['Trier'])){
+                $sql = "SELECT * FROM auteur WHERE nom LIKE ? OR prenom LIKE ? OR date_naissance LIKE ? $choix";
+
+                $idRequete = executeR($connexion,$sql,array($nom,$prenom,$date_naissance));
+                header('location:listeAuteur.php?');
+            }
             ?>
             
             <form method="post" action="formAjout.php">
