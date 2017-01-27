@@ -24,7 +24,7 @@
                 </p>
             </form>
             <?php
-            require_once 'include/infoconnexion.php';
+            require_once 'include/infoConnexion.php';
             require_once 'include/connexion.php';
             require_once 'include/executeRequete.php';
             $cnx=connexion(UTILISATEUR,MOTDEPASSE,SERVER,BASEDEDONNEES);
@@ -52,6 +52,15 @@
           
             $nbLignes=$idRequete->rowCount();
             echo '</br>Il y a '. $nbLignes .' auteurs.';
+            
+            if(isset($_POST['Rechercher'])){
+              
+               $nom=$_POST['nom'];
+               $Sql = "SELECT auteur FROM nom WHERE nom  LIKE '%".$nom."%'";
+               $idRequete = executeRequete($cnx,$Sql,array($nom,$prenom,$date_naissance,$id_auteur));
+               header('location:listeAuteur.php?');
+            }
+            
             ?>
             
             <form method="post" action="formAjout.php">

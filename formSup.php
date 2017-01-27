@@ -5,7 +5,7 @@
 	</head>
         <body>
             <?php
-            require_once 'include/infoconnexion.php';
+            require_once 'include/infoConnexion.php';
             require_once 'include/connexion.php';
             require_once 'include/executeRequete.php';
             $cnx=connexion(UTILISATEUR,MOTDEPASSE,SERVER,BASEDEDONNEES);
