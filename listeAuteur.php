@@ -56,9 +56,11 @@
             if(isset($_POST['Rechercher'])){
               
                $nom=$_POST['nom'];
-               $Sql = "SELECT auteur FROM nom WHERE nom  LIKE ?";
-               $Sql->execute(array("%$_POST[nom]%"));
-                $idRequete = executeRequete($cnx,$Sql,array($nom,$prenom,$date_naissance,$id_auteur));
+               $Sql = "SELECT * FROM auteur WHERE nom  LIKE  '%'$nom'%'";
+               /*$Sql->execute(array("%$_POST[nom]%"));*/
+               
+               $idRequete = executeRequete($cnx,$Sql,array($nom,$prenom,$date_naissance));
+                
                header('location:listeAuteur.php?');
             }
             
